@@ -4,7 +4,7 @@ VALUES = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 def get_matrix(path):
     """Used by both solutions"""
-    with open(path, 'r') as file:
+    with open(path) as file:
         matrix = [list(line.strip()) for line in file.readlines()]
     matrix = [[int(matrix[row][col]) for col in range(len(matrix[0]))] for row in range(len(matrix))]
     return matrix
@@ -34,17 +34,16 @@ def prep_empty_cells(matrix, symbol):
 
 
 def get_possible_nums(matrix, row, col):
-    nums_in_pos = VALUES[:]
+    nums_in_pos = VALUES
     for val in VALUES:
-        if (val in get_nums_in_row(matrix, row) 
-            or val in get_nums_in_col(matrix, col) 
+        if (val in get_nums_in_row(matrix, row)
+            or val in get_nums_in_col(matrix, col)
             or val in get_nums_in_square(matrix, row, col)) and val in nums_in_pos:
             nums_in_pos.remove(val)
     return nums_in_pos
 
 
 def fill_possible_nums(matrix):
-    changed = False
     for row in range(len(matrix)):
         for col in range(len(matrix[0])):
             if type(matrix[row][col]) is list:
@@ -56,7 +55,6 @@ def fill_possible_nums(matrix):
 
 
 def convert_singles(matrix):
-    changed = False
     for row in range(len(matrix)):
         for col in range(len(matrix[0])):
             if type(matrix[row][col]) is list:
@@ -134,10 +132,10 @@ def get_shortest_possible(matrix, exlude=[]):
 def solve(matrix):
     while not is_solved(matrix):
         changed = (
-            fill_possible_nums(matrix) 
-            or convert_singles(matrix) 
-            or convert_unique_in_row(matrix) 
-            or convert_unique_in_col(matrix) 
+            fill_possible_nums(matrix)
+            or convert_singles(matrix)
+            or convert_unique_in_row(matrix)
+            or convert_unique_in_col(matrix)
             or convert_unique_in_square(matrix)
             )
 
