@@ -45,7 +45,7 @@ def get_possible_nums(matrix, row, col):
 
 def fill_possible_nums(matrix):
     for row in range(len(matrix)):
-        for col in range(len(matrix[0])):
+        for col in range(len(marix[0])):
             if type(matrix[row][col]) is list:
                     new_value = get_possible_nums(matrix, row, col)
                     if new_value != matrix[row][col]:
@@ -130,6 +130,7 @@ def get_shortest_possible(matrix, exlude=[]):
 
 
 def solve(matrix):
+    raise ValueError
     while not is_solved(matrix):
         changed = (
             fill_possible_nums(matrix)
@@ -171,4 +172,4 @@ def solve_sudoku(path):
 
 # solved_matrix = solve_sudoku(path)
 # for row in solved_matrix:
-#     print(row)
+    # print(row)
